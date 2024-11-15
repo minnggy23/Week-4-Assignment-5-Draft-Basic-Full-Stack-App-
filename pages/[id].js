@@ -1,60 +1,49 @@
 import Layout from '../components/layout';
-import { getAllIds, getData } from '../lib/persons';
-import {getRelationsForPerson} from '../lib/relations';
+import { getAllIds, getData } from '../lib/data';
 
 export async function getStaticProps( { params } ) {
   
-  const personData = await getData(params.id);
+  const data = await getData(params.id);
   
-  const relations = await getRelationsForPerson(params.id);
+  // const relations = await getRelationsForPerson(params.id);
   
-  const relatedPeople = []
-  for (const relation of relations) {
-    const relatedPerson = await getData(relation.relationId.toString());
+  // const relatedPeople = []
+  // for (const relation of relations) {
+  //   const relatedPerson = await getData(relation.relationId.toString());
     
-    relatedPeople.push(relatedPerson)
-  }
+  //   relatedPeople.push(relatedPerson)
+  // }
 
-  
+  console.log({ data })
   return {
     props: {
-      personData,
-      relatedPeople,
+      data,
     }
   };
 }
 
 
 export async function getStaticPaths() {
-  const paths = getAllIds();
+  const paths = await getAllIds();
+  console.log({ paths: JSON.stringify(paths)})
   return {
     paths,
     fallback: false
   };
 }
-export default function Entry({personData, relatedPeople}){
+export default function Entry({data}){
    // console.log({relatedPeople})
+   console.log({data})
+   const postTitle = data.post_title
+   console.log('runing ID route');
     return(
         <Layout>
-            <article className="card col-6">
-                <div className="card-body">
-                    <h5 className="card-title">Name: {personData.name}</h5>
-                    <h6 className="card-subtitle mb-2 text-body-secondary">Birthday: {personData.birthday}</h6>
-                    <p className="card-text">Age: {personData.age}</p>
-                   
-                </div>
-                <div>
-                 <h2>Friends</h2> 
-                 <ul>
-  {relatedPeople.map((person, index) => (
-    <li key={index}>
-      <strong>{person.name}</strong> (ID: {person.id})
-    </li>
-  ))}
-</ul>
-
-                </div>
-            </article>    
+          <h1>List of Posts names</h1>
+          <ul class="list-group">
+            <li class="list-group-item"> {postTitle}  </li>
+            <li class="list-group-item">A second item</li>
+           </ul>
+          
         </Layout>
     );
 }
