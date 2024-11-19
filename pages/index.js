@@ -22,7 +22,7 @@ export default function Home({allData}){
 <ul class="list-group">
     {allData.map(
         function(item) {
-            return <li class="list-group-item">{JSON.stringify(item)}</li>
+            return <li key={item.id} class="list-group-item">{JSON.stringify(item)}</li>
         }
     )}
 
