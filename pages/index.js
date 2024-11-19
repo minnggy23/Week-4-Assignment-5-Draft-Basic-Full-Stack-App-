@@ -13,14 +13,19 @@ export async function getStaticProps(){
 } 
 
 
+
 /// Displays page
 export default function Home({allData}){
     return(
         <Layout home>
 
 <ul class="list-group">
-  <li class="list-group-item"> {JSON.stringify(allData)}</li>
-  
+    {allData.map(
+        function(item) {
+            return <li class="list-group-item">{JSON.stringify(item)}</li>
+        }
+    )}
+
 </ul>
        
         </Layout>
