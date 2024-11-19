@@ -35,13 +35,14 @@ export default function Entry({data}){
    // console.log({relatedPeople})
    console.log({data})
    const postTitle = data.post_title
+  // const secondPost = data.post_title
    console.log('runing ID route');
     return(
         <Layout>
           <h1>List of Posts names</h1>
           <ul class="list-group">
             <li class="list-group-item"> {postTitle}  </li>
-            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">  {secondPost} </li>
            </ul>
           
         </Layout>
