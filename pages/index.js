@@ -17,7 +17,12 @@ export async function getStaticProps(){
 export default function Home({allData}){
     return(
         <Layout home>
-        {JSON.stringify(allData)}
+
+<ul class="list-group">
+  <li class="list-group-item"> {JSON.stringify(allData)}</li>
+  
+</ul>
+       
         </Layout>
     );
 }
