@@ -2,8 +2,8 @@ import Layout from '../components/layout';
 import { getAllIds, getData } from '../lib/data';
 
 export async function getStaticProps( { params } ) {
-  
-  const data = await getData(params.id);
+  const id = params.id
+  const data = await getData(id);
   
   // const relations = await getRelationsForPerson(params.id);
   
@@ -12,12 +12,12 @@ export async function getStaticProps( { params } ) {
   //   const relatedPerson = await getData(relation.relationId.toString());
     
   //   relatedPeople.push(relatedPerson)
-  // }
+  // } 
 
   console.log({ data })
   return {
     props: {
-      data,
+      data
     }
   };
 }
@@ -31,11 +31,13 @@ export async function getStaticPaths() {
     fallback: false
   };
 }
-export default function Entry({data}){
+
+export default function Entry(props){
    // console.log({relatedPeople})
-   console.log({data})
+  //  console.log({data})
+  const data = props.data
    const postTitle = data.post_title
-  // const secondPost = data.post_title
+  const secondPost = data.post_title
    console.log('runing ID route');
     return(
         <Layout>
@@ -45,6 +47,7 @@ export default function Entry({data}){
             <li class="list-group-item">  {secondPost} </li>
            </ul>
           
+           {/* test */}
         </Layout>
     );
 }
